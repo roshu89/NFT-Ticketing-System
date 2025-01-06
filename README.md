@@ -1,4 +1,5 @@
-# Tokenmaster
+
+# TicketMaster-clone
 
 ## Technology Stack & Tools
 
@@ -31,3 +32,4 @@ In a separate terminal execute:
 
 ### 6. Start frontend
 `$ npm run start`
+

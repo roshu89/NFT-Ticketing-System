@@ -1,4 +1,4 @@
-const hre = require("hardhat")
+const { ethers } = require("hardhat");
 
 const tokens = (n) => {
   return ethers.utils.parseUnits(n.toString(), 'ether')
@@ -8,7 +8,7 @@ async function main() {
   // Setup accounts & variables
   const [deployer] = await ethers.getSigners()
   const NAME = "TokenMaster"
-  const SYMBOL = "TM"
+  const SYMBOL = "TM21"
 
   // Deploy contract
   const TokenMaster = await ethers.getContractFactory("TokenMaster")

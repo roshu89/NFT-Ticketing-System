@@ -2,22 +2,28 @@
 pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract TokenMaster is ERC721 {
     address public owner;
-    uint32 public eventId;
-    uint256 public totalSupply;
+    uint64 public eventId;
+    using Counters for Counters.Counter;
+    Counters.Counter private _tokenIds;
 
     struct mainEvent {
-        uint32 id;
+        uint64 id;
         string eventName;
         uint256 cost;
-        uint16 maxTickets;
+        uint32 tickets;
+        uint32 maxTickets;
         string date;
         string time;
         string location;
     }
-    mapping (uint32 => mainEvent) private allEvents;
+    mapping (uint64 => mainEvent) private allEvents; // id => mainEvent struct
+    mapping (uint64 => mapping(address => bool)) public hasBought; // id => [msg.sender => boolean]
+    mapping (uint64 => mapping(uint64 => address)) public seatTaken; // id => [seats => msg.sender]
+    mapping (uint64 => uint64[]) seatsTaken; // id => [seats]
 
     modifier onlyOwner() {
         msg.sender == owner;
@@ -28,14 +34,27 @@ contract TokenMaster is ERC721 {
         owner = msg.sender;
     }
 
-    function list (string memory _eventName, uint256 _cost, uint16 _maxTickets, string memory _date, string memory _time, string memory _location) public  onlyOwner {
+    function list (string memory _eventName, uint256 _cost, uint32 _tickets ,uint32 _maxTickets, string memory _date, string memory _time, string memory _location) public  onlyOwner {
         eventId++;
-        allEvents[eventId] = mainEvent(eventId, _eventName, _cost, _maxTickets, _date, _time, _location);
+        allEvents[eventId] = mainEvent(eventId, _eventName, _cost, _tickets, _maxTickets, _date, _time, _location);
     }
 
-    function mint() public {
-        totalSupply++;
-        _safeMint(msg.sender, totalSupply);
+    function mint(uint64 _id, uint64 _seats) public payable {
+
+        require(_id != 0);
+        require(allEvents[_id].tickets > 0);
+        require(msg.value >= allEvents[_id].cost);
+        require(hasBought[_id][msg.sender] == false);
+        require(seatTaken[_id][_seats] == address(0));
+
+        allEvents[_id].tickets -= 1;
+        hasBought[_id][msg.sender] = true;
+        seatTaken[_id][_seats] = msg.sender;
+        seatsTaken[_id].push(_seats);
+        
+        _tokenIds.increment();
+        uint256 newItemId = _tokenIds.current();
+        _safeMint(msg.sender, newItemId);
     }
 
     function getEvent(uint32 _id) public view returns (mainEvent memory) {

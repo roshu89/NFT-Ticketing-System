@@ -15,7 +15,6 @@ contract TokenMaster is ERC721 {
         string eventName;
         uint256 cost;
         uint32 tickets;
-        uint32 maxTickets;
         string date;
         string time;
         string location;
@@ -34,9 +33,9 @@ contract TokenMaster is ERC721 {
         owner = msg.sender;
     }
 
-    function list (string memory _eventName, uint256 _cost, uint32 _tickets ,uint32 _maxTickets, string memory _date, string memory _time, string memory _location) public  onlyOwner {
+    function list (string memory _eventName, uint256 _cost, uint32 _tickets, string memory _date, string memory _time, string memory _location) public  onlyOwner {
         eventId++;
-        allEvents[eventId] = mainEvent(eventId, _eventName, _cost, _tickets, _maxTickets, _date, _time, _location);
+        allEvents[eventId] = mainEvent(eventId, _eventName, _cost, _tickets, _date, _time, _location);
     }
 
     function mint(uint64 _id, uint64 _seats) public payable {
@@ -59,5 +58,10 @@ contract TokenMaster is ERC721 {
 
     function getEvent(uint32 _id) public view returns (mainEvent memory) {
         return allEvents[_id];
+    }
+
+    function withdraw() public onlyOwner {
+        (bool sucess, ) = owner.call{ value: address(this).balance}("");
+        require(sucess);
     }
 }

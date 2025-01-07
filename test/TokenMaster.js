@@ -7,7 +7,6 @@ const SYMBOL = "TM21";
 const EVENT_NAME = "Test ETH";
 const EVENT_COST = ethers.utils.parseUnits('1', 'ether');
 const EVENT_TICKET = 100;
-const EVENT_MAX_TICKET = 100;
 const EVENT_DATE = "Dec 20 2025";
 const EVENT_TIME = "12:00 PM IST";
 const EVENT_LOCATION = "Test Location";
@@ -21,7 +20,7 @@ describe("TokenMaster", () => {
     [deployer, buyer] = await ethers.getSigners();
     const TokenMaster = await ethers.getContractFactory(NAME);
     tokenMaster = await TokenMaster.deploy(NAME, SYMBOL);
-    const transaction = await tokenMaster.connect(deployer).list(EVENT_NAME, EVENT_COST, EVENT_TICKET, EVENT_MAX_TICKET, EVENT_DATE, EVENT_TIME, EVENT_LOCATION);
+    const transaction = await tokenMaster.connect(deployer).list(EVENT_NAME, EVENT_COST, EVENT_TICKET, EVENT_DATE, EVENT_TIME, EVENT_LOCATION);
     await transaction.wait();
   })
 
@@ -54,7 +53,7 @@ describe("TokenMaster", () => {
       expect(event.id).equal(1);
       expect(event.eventName).equal(EVENT_NAME);
       expect(event.cost).equal(EVENT_COST);
-      expect(event.maxTickets).equal(EVENT_MAX_TICKET);
+      expect(event.maxTickets).equal(EVENT_TICKET);
       expect(event.date).equal(EVENT_DATE);
       expect(event.time).equal(EVENT_TIME);
       expect(event.location).equal(EVENT_LOCATION);
@@ -91,6 +90,28 @@ describe("TokenMaster", () => {
       const balance = await ethers.provider.getBalance(tokenMaster.address);
       expect(balance).equal(AMOUNT);
     })
+
+  })
+
+  describe("Widthrawing", () => {
+    const ID = 1;
+    const SEAT = 50;
+    const AMOUNT = ethers.utils.parseUnits('1','ether');
+    let balanceBefore
     
+    beforeEach(async () => {
+      balanceBefore = await ethers.provider.getBalance(deployer.address);
+      let transaction = await tokenMaster.connect(buyer).mint(ID, SEAT, { value: AMOUNT });
+      await transaction.wait();
+      transaction = await tokenMaster.connect(deployer).withdraw();;
+      await transaction.wait()
+
+    })
+
+    it("Updates the deployer balance", async () => {
+      const balanceAfter = await ethers.provider.getBalance(deployer.address);
+      expect(balanceAfter).to.greaterThan(balanceBefore);
+    })
+
   })
 })

@@ -60,7 +60,7 @@ const SeatChart = ({ occasion, tokenMaster, provider, setToggle }) => {
           <strong>WALKWAY</strong>
         </div>
 
-        {seatsTaken && Array(Number(occasion.maxTickets) - 50).fill(1).map((e, i) =>
+        {seatsTaken && Array(Number(occasion.tickets) - 50).fill(1).map((e, i) =>
           <Seat
             i={i}
             step={26}
@@ -81,7 +81,7 @@ const SeatChart = ({ occasion, tokenMaster, provider, setToggle }) => {
         {seatsTaken && Array(25).fill(1).map((e, i) =>
           <Seat
             i={i}
-            step={(Number(occasion.maxTickets) - 24)}
+            step={(Number(occasion.tickets) - 24)}
             columnStart={22}
             maxColumns={5}
             rowStart={2}

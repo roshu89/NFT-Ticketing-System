@@ -28,17 +28,17 @@ function App() {
     setProvider(provider)
 
     const network = await provider.getNetwork()
+    // console.log(network.chainId)
     const tokenMaster = new ethers.Contract(config[network.chainId].TokenMaster.address, TokenMaster, provider)
     setTokenMaster(tokenMaster)
 
-    const totalOccasions = await tokenMaster.totalOccasions()
+    const totalOccasions = await tokenMaster.eventId()
     const occasions = []
-
+    
     for (var i = 1; i <= totalOccasions; i++) {
-      const occasion = await tokenMaster.getOccasion(i)
+      const occasion = await tokenMaster.getEvent(i)
       occasions.push(occasion)
     }
-
     setOccasions(occasions)
 
     window.ethereum.on('accountsChanged', async () => {

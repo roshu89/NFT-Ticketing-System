@@ -295,11 +295,6 @@
 						"type": "uint32"
 					},
 					{
-						"internalType": "uint32",
-						"name": "maxTickets",
-						"type": "uint32"
-					},
-					{
 						"internalType": "string",
 						"name": "date",
 						"type": "string"
@@ -386,11 +381,6 @@
 			{
 				"internalType": "uint32",
 				"name": "_tickets",
-				"type": "uint32"
-			},
-			{
-				"internalType": "uint32",
-				"name": "_maxTickets",
 				"type": "uint32"
 			},
 			{

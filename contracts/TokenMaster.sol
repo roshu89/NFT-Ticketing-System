@@ -64,4 +64,7 @@ contract TokenMaster is ERC721 {
         (bool sucess, ) = owner.call{ value: address(this).balance}("");
         require(sucess);
     }
+    function getSeatsTaken(uint64 _id) public view returns (uint64[] memory) {
+        return seatsTaken[_id];
+    }
 }

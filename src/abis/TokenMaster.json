@@ -322,6 +322,25 @@
 		"inputs": [
 			{
 				"internalType": "uint64",
+				"name": "_id",
+				"type": "uint64"
+			}
+		],
+		"name": "getSeatsTaken",
+		"outputs": [
+			{
+				"internalType": "uint64[]",
+				"name": "",
+				"type": "uint64[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint64",
 				"name": "",
 				"type": "uint64"
 			},

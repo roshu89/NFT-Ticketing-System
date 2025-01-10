@@ -21,7 +21,7 @@ function App() {
   const loadBlockchainData = async () => {
 
     const defaultProvider = new ethers.providers.JsonRpcProvider("https://volta-rpc.energyweb.org");
-    console.log('default provideR: ', defaultProvider)
+    // console.log('default provideR: ', defaultProvider)
 
     const tokenMaster = new ethers.Contract(TokenMasterAddress, TokenMasterABI, defaultProvider);
     setTokenMaster(tokenMaster)

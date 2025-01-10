@@ -6,17 +6,12 @@ import Navigation from './components/Navigation'
 import Sort from './components/Sort'
 import Card from './components/Card'
 import SeatChart from './components/SeatChart'
-
-// ABIs
-import TokenMaster from './abis/TokenMaster.json'
-
-// Config
-import config from './config.json'
+import { TokenMasterABI, TokenMasterAddress } from './abis/TokenMasterConfig'
 
 function App() {
-  const [provider, setProvider] = useState(null)
+  
   const [account, setAccount] = useState(null)
-
+  
   const [tokenMaster, setTokenMaster] = useState(null)
   const [occasions, setOccasions] = useState([])
 
@@ -24,12 +19,11 @@ function App() {
   const [toggle, setToggle] = useState(false)
 
   const loadBlockchainData = async () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum)
-    setProvider(provider)
 
-    const network = await provider.getNetwork()
-    // console.log(network.chainId)
-    const tokenMaster = new ethers.Contract(config[network.chainId].TokenMaster.address, TokenMaster, provider)
+    const defaultProvider = new ethers.providers.JsonRpcProvider("https://volta-rpc.energyweb.org");
+    // console.log('default provideR: ', defaultProvider)
+
+    const tokenMaster = new ethers.Contract(TokenMasterAddress, TokenMasterABI, defaultProvider);
     setTokenMaster(tokenMaster)
 
     const totalOccasions = await tokenMaster.eventId()
@@ -41,11 +35,14 @@ function App() {
     }
     setOccasions(occasions)
 
-    window.ethereum.on('accountsChanged', async () => {
-      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-      const account = ethers.utils.getAddress(accounts[0])
-      setAccount(account)
-    })
+    if(window.ethereum) {
+      window.ethereum.on('accountsChanged', async () => {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+        const account = ethers.utils.getAddress(accounts[0])
+        setAccount(account)
+      })
+    }
+    
   }
 
   useEffect(() => {
@@ -68,7 +65,6 @@ function App() {
             occasion={occasion}
             id={index + 1}
             tokenMaster={tokenMaster}
-            provider={provider}
             account={account}
             toggle={toggle}
             setToggle={setToggle}
@@ -82,7 +78,6 @@ function App() {
         <SeatChart
           occasion={occasion}
           tokenMaster={tokenMaster}
-          provider={provider}
           setToggle={setToggle}
         />
       )}

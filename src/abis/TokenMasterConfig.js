@@ -1,4 +1,6 @@
-[
+export const TokenMasterAddress = "0x3BF2a4F423c5A178F6f45d762dC87D9D7E5d5452"
+
+export const TokenMasterABI = [
 	{
 		"inputs": [
 			{

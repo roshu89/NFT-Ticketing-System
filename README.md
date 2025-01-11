@@ -1,6 +1,13 @@
 # Web3 Ticket Booking as NFTs
 
-This project implements a Web3-based ticket booking system, where tickets are issued as NFTs (Non-Fungible Tokens) on the blockchain. The system ensures fair distribution of tickets, leveraging smart contracts written in Solidity and interacting with the blockchain using Ethers.js.
+
+Project Preview
+https://github.com/user-attachments/assets/5a82f5f8-4006-49ee-bc39-4b059b19cea9
+
+
+
+This project implements an NFT ticketing system inspired by Ticketmaster! 🎟️ Leveraging blockchain technology, this feature enhances security, authenticity, and fan engagement by providing verifiable NFT tickets 🔒, leveraging smart contracts written in Solidity and interacting with the blockchain using Ethers.js.
+Thanks to DAPP University for the great learning resources! 🙌
 
 ## Technology Stack & Tools
 - **Solidity**: Writing Smart Contracts & Tests (Version: ^0.8.9)
@@ -65,3 +72,7 @@ This project implements a Web3-based ticket booking system, where tickets are is
 - **Equal Ticket Distribution**: Tickets are distributed fairly to prevent hoarding.
 - **MetaMask Integration**: MetaMask is used for wallet connection and transactions.
 - **Smart Contract Testing**: Comprehensive tests are written in Solidity to ensure security and functionality.
+
+## Acknowledgement 
+- DAPP university
+- TicketMaster

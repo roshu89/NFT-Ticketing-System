@@ -35,13 +35,13 @@ function App() {
     }
     setOccasions(occasions)
 
-    if(window.ethereum) {
+ 
       window.ethereum.on('accountsChanged', async () => {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
         const account = ethers.utils.getAddress(accounts[0])
         setAccount(account)
       })
-    }
+    
     
   }
 

@@ -16,8 +16,8 @@ module.exports = {
       volta: {
          url: API_URL,
          accounts: [`0x${PRIVATE_KEY}`],
-         gas: 2100000,
-         gasPrice: 800000000,
+         gas: 300000, // Adjusted gas limit for minting ERC-721 NFTs
+         gasPrice: 2000000000, // Adjusted gas price in wei (2 Gwei)
       }
    },
 };

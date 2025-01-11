@@ -45,13 +45,12 @@ const SeatChart = ({ occasion, tokenMaster, setToggle }) => {
           setHasSold(true);
         }
       } catch (error) {
-        setHasSold(false);
   
         // Handle known errors
         if (error.message.includes('Non-200 status code: 207')) {
-          window.alert("Either this seat is already taken or you cannot book more than 1 ticket for an event.");
+          window.alert("This seat is Booked! | note: you cannot book more than 1 ticket for an event.");
         } else if (error.message.includes("Internal JSON-RPC error.")) {
-          window.alert("Either this seat is already taken or you cannot book more than 1 ticket for an event.");
+          window.alert("This seat is Booked! | note: you cannot book more than 1 ticket for an event.");
         } 
         else if (error.message.includes("Request of type 'wallet_requestPermissions'")) {
           window.alert("Please connect your web3 wallet!");

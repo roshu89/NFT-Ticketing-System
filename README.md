@@ -1,9 +1,10 @@
+
 # Web3 Ticket Booking as NFTs
 
 
-Project Preview
-https://github.com/user-attachments/assets/5a82f5f8-4006-49ee-bc39-4b059b19cea9
 
+
+[Project Preview](https://github.com/user-attachments/assets/90f9442b-31c2-43cb-b1de-0c3f3d7ef88e)
 
 
 This project implements an NFT ticketing system inspired by Ticketmaster! 🎟️ Leveraging blockchain technology, this feature enhances security, authenticity, and fan engagement by providing verifiable NFT tickets 🔒, leveraging smart contracts written in Solidity and interacting with the blockchain using Ethers.js.

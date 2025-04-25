@@ -12,13 +12,17 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "react-icons": "^4.10.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "format:all": "prettier --write ."
   },
   "eslintConfig": {
     "extends": [
@@ -39,9 +43,17 @@
     ]
   },
   "devDependencies": {
+    "@headlessui/react": "^2.2.2",
+    "@heroicons/react": "^2.2.0",
     "@nomicfoundation/hardhat-toolbox": "^2.0.1",
     "@openzeppelin/contracts": "^4.8.2",
+    "autoprefixer": "^10.4.21",
+    "framer-motion": "^12.9.1",
     "hardhat": "^2.12.7",
-    "hardhat-deploy": "^0.14.0"
+    "hardhat-deploy": "^0.14.0",
+    "postcss": "^8.5.3",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-preset-env": "^9.1.4",
+    "tailwindcss": "^4.1.4"
   }
 }
